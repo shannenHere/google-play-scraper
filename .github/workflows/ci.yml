@@ -26,19 +26,13 @@ jobs:
 
     - name: Run tests
       run: |
+        mkdir -p test-results
         npm test -- --grep "Throttle tests" || true
-
-    - name: Generate coverage report
-      run: |
-        npm install -g nyc
+        mkdir -p coverage
         nyc npm test || true 
         nyc report --reporter=lcov
-    
-    - name: Prepare coverage directory
-      run: mkdir -p coverage
-
-    - name: Move coverage report
-      run: mv coverage/lcov-report/* coverage/
+        cp -r coverage/lcov-report/* coverage/
+        cp -r test-results/* coverage/
 
     - name: Upload build report
       uses: actions/upload-artifact@v3
@@ -46,7 +40,7 @@ jobs:
         name: build-report
         path: build-report.log
       
-    - name: Upload coverage report
+    - name: Upload coverage and test report
       uses: actions/upload-artifact@v3
       with:
         name: coverage-report
