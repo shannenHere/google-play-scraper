@@ -22,7 +22,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        npm ci | tee output/build-report.log
+        npm ci | tee build-report.log
 
     - name: Run tests
       run: |
@@ -35,19 +35,19 @@ jobs:
         nyc report --reporter=lcov
     
     - name: Prepare coverage directory
-      run: mkdir -p output/coverage
+      run: mkdir -p coverage
 
     - name: Move coverage report
-      run: mv coverage/lcov-report/* output/coverage/
+      run: mv coverage/lcov-report/* coverage/
 
     - name: Upload build report
       uses: actions/upload-artifact@v3
       with:
         name: build-report
-        path: output/build-report.log
+        path: build-report.log
       
     - name: Upload coverage report
       uses: actions/upload-artifact@v3
       with:
         name: coverage-report
-        path: output/coverage
+        path: coverage
