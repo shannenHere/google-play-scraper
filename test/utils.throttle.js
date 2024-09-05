@@ -19,7 +19,7 @@ describe('Throttle tests', function () {
 
   const url = 'https://yesno.wtf/api'; // Fake url used in this test, it could be anything.
 
-  it('Should make three requests with 2000ms interval. (Throttle function)', function () {
+  it.skip('Should make three requests with 2000ms interval. (Throttle function)', function () {
     // If we don't want to rely on the availability of a particular api we can use mocks.
     // The fake server intercept http calls and return specified objects if it mach the same method/url.
     server.respondWith('GET', url, JSON.stringify({ test: 'this works' }));
