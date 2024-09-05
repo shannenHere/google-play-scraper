@@ -30,7 +30,7 @@ jobs:
 
     - name: Run tests
       run: |
-        npm test -- --grep "Throttle tests" || true
+        npm test || true
 
     - name: Generate coverage report
       run: |
