@@ -25,9 +25,11 @@ jobs:
         npm ci | tee build-report.log
         npm install nyc --save-dev
 
+    - name: Create test-results directory
+      run: mkdir -p test-results
+
     - name: Run tests
       run: |
-        mkdir -p test-results
         npm test -- --grep "Throttle tests" || true
 
     - name: Generate coverage report
@@ -35,8 +37,7 @@ jobs:
         npx nyc npm test || true
         npx nyc report --reporter=lcov || true
         mkdir -p coverage
-        cp -r coverage/lcov-report/* coverage/
-        cp -r test-results/* coverage/
+        cp -r coverage/lcov-report/* coverage/ || true
 
     - name: Upload build report
       uses: actions/upload-artifact@v3
