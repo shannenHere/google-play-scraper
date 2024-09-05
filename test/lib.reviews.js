@@ -103,7 +103,7 @@ describe('Reviews method', () => {
     assert.notDeepEqual(data, dataSecondPage);
   });
 
-  it.skip('should get same set of reviews on each run', async () => {
+  it('should get same set of reviews on each run', async () => {
     const firstPageReviews = await gplay.reviews({
       appId: 'com.facebook.katana',
       num: 1500,
