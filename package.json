@@ -9,7 +9,7 @@
     "test:report": "jest --coverage",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
-    "test:run:all": "npm run test && npm run test:coverage"
+    "test:run:all": "npm run test && npm run test:coverage",
     "lint": "eslint ."
   },
   "repository": {
