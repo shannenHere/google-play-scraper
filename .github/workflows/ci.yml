@@ -25,18 +25,19 @@ jobs:
         npm ci | tee build-report.log
         npm install nyc --save-dev
 
-    - name: Create test-results directory
-      run: mkdir -p test-results
+    - name: Create directories
+      run: |
+        mkdir -p test-results
+        mkdir -p coverage
 
     - name: Run tests
       run: |
-        npm test || true
+        npm test > test-results/test-report.log || true
 
     - name: Generate coverage report
       run: |
         npx nyc npm test || true
         npx nyc report --reporter=lcov || true
-        mkdir -p coverage
         cp -r coverage/lcov-report/* coverage/ || true
 
     - name: Upload build report
@@ -45,6 +46,12 @@ jobs:
         name: build-report
         path: build-report.log
       
+    - name: Upload test report
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-report
+        path: test-results/test-report.log
+
     - name: Upload coverage report
       uses: actions/upload-artifact@v3
       with:
